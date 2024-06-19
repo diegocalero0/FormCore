@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from "react-native";
 import { TextType } from "./types/TextType";
 
-const Headline1 = (props: TextType) => {
+const Headline2 = (props: TextType) => {
     return (
         <Text style={styles.text}>{props.text}</Text>
     )
@@ -9,10 +9,10 @@ const Headline1 = (props: TextType) => {
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '800',
         color: 'black'
     }
 })
 
-export default Headline1
+export default Headline2

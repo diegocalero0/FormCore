@@ -1,3 +1,4 @@
 export type TextType = {
-    text: string
+    text: string,
+    color?: string
 }
