@@ -1,9 +1,9 @@
 import { StyleSheet, Text } from "react-native";
 import { TextType } from "./types/TextType";
 
-const BodyMedium = (props: TextType) => {
+const BodyMedium = ({text, color, textAlign}: TextType) => {
     return (
-        <Text style={[styles.text, {color: props.color ?? 'black'}]}>{props.text}</Text>
+        <Text style={[styles.text, {color: color ?? 'black', textAlign: textAlign}]}>{text}</Text>
     )
 }
 

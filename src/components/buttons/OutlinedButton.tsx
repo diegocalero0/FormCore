@@ -7,10 +7,13 @@ interface MainButtonProps {
     onPress: () => void
 }
 
-const MainButton = ({ text, disabled, onPress } : MainButtonProps) => {
+const OutlinedButton = ({ text, disabled, onPress } : MainButtonProps) => {
+
+    const color = disabled ? "#BEBEBE" : "#003670"
+
     return (
-        <TouchableOpacity onPress={onPress} disabled={disabled} style={[styles.button, {backgroundColor: disabled ? "#BEBEBE" : "#003670"}]}>
-            <BodyMedium text={text} color="white"/>
+        <TouchableOpacity onPress={onPress} disabled={disabled} style={[styles.button, {borderColor: color}]}>
+            <BodyMedium text={text} color={color}/>
         </TouchableOpacity>
     )
 }
@@ -22,7 +25,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
+        borderWidth: 1
     }
 })
 
-export default MainButton
+export default OutlinedButton

@@ -1,26 +1,86 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
-import { areAllQuestionsAnswered, getQuestions } from "../domain/redux/FormSlice";
-import { QuestionsRepository } from "../data/repositories/QuestionsRepository";
+import { areAllQuestionsAnswered, getQuestions, resetState, sendAnswers } from "../domain/redux/FormSlice";
 import { useEffect } from "react";
 import QuestionCard from "./components/QuestionCard";
 import Headline1 from "../../../components/text/Headline1";
 import { SvgUri } from "react-native-svg";
 import BodyMedium from "../../../components/text/BodyMedium";
 import MainButton from "../../../components/buttons/MainButton";
+import Headline2 from "../../../components/text/Headline2";
+import LottieView from "lottie-react-native";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../App";
 
-export function FormScreen() {
+type Props = StackScreenProps<RootStackParamList, "Form">
+
+export function FormScreen({route, navigation}: Props) {
+
     const dispatch = useAppDispatch()
-    const data = useAppSelector(state => state.formReducer.questions)
+
+    const answersSent = useAppSelector(state => state.formReducer.answersSent)
+    const questions = useAppSelector(state => state.formReducer.questions)
+    const loading = useAppSelector(state => state.formReducer.loading)
+    const error = useAppSelector(state => state.formReducer.error)
     const isMainButtonEnabled = useAppSelector(state => areAllQuestionsAnswered({form: state.formReducer}))
 
     useEffect(() => {
-        dispatch(getQuestions(new QuestionsRepository()))
+        dispatch(getQuestions())
     }, [])
+
+    useEffect(() => {
+        if(answersSent) {
+            dispatch(resetState())
+            navigation.navigate("Confirm")
+        }
+    }, [answersSent])
+
+   
+
+    const ScreenLoader = () => {
+        return(<View style={styles.loaderContainer}>
+            <ActivityIndicator size={32}/>
+        </View>)
+    }
+
+    const ScreenError = () => {
+        return(<View style={styles.errorContainer}>
+            <LottieView
+                source={require('../../../assets/json/error_animation.json')}
+                autoPlay
+                loop
+                style={styles.errorAnimation}/>
+            <Headline2 text="Ocurrió un error"/>
+            <BodyMedium
+                text="No pudimos obtener las preguntas del formulario, intenta más tarde o reinténtalo."
+                textAlign="center"/>
+            <View style={styles.retryButton}>
+            <MainButton
+                text="Reintentar"
+                disabled={false}
+                onPress={() => {
+                    dispatch(getQuestions())
+                }}/>
+            </View>
+        </View>)
+    }
+
+    if(loading) {
+        return <ScreenLoader/>
+    }
+
+    if(error != null) {
+        return <ScreenError/>
+    }
 
     return (
         <View style={styles.mainContainer}>
+
+            {loading && <ScreenLoader/>}   
+            {error != null && !loading && <ScreenError/>}
+            {error == null && !loading &&
+
             <ScrollView
                 contentContainerStyle={styles.scrollViewContentContainer}
                 style={styles.scrollView}>
@@ -35,7 +95,7 @@ export function FormScreen() {
                 </View>
                 <View style={styles.questionsContainer}>
                     {
-                        data?.map(question => {
+                        questions?.map(question => {
                             return <View key={question.questionId} style={{ marginVertical: 8 }}>
                                 <QuestionCard question={question} />
                             </View>
@@ -43,9 +103,11 @@ export function FormScreen() {
                         })
                     }
                 </View>
-            </ScrollView>
+            </ScrollView>}
             <View style={styles.buttonContainer}>
-                <MainButton text="Enviar respuestas" disabled={!isMainButtonEnabled}/>
+                <MainButton onPress={() => {
+                    dispatch(sendAnswers(questions))
+                }} text="Enviar respuestas" disabled={!isMainButtonEnabled}/>
             </View>
         </View>
     )
@@ -53,7 +115,21 @@ export function FormScreen() {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white',
+    },
+    loaderContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    },
+    errorContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        paddingHorizontal: 24
     },
     greetings: {
         marginHorizontal: 16,
@@ -61,7 +137,6 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         width: '100%',
-        backgroundColor: 'white',
         flex: 1
     },
     scrollViewContentContainer: {
@@ -82,5 +157,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 6,
         elevation: 12,
+    },
+    errorAnimation: {
+        width: 128,
+        height: 128
+    },
+    retryButton: {
+        marginTop: 16
     }
 })

@@ -3,9 +3,16 @@ import { Providers } from "./redux/providers"
 import { FormScreen } from "./features/form/presentation/FormScreen"
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from "@react-navigation/native";
-import { FORM_SCREEN } from "./constants/ScreenContants";
+import { CONFIRM_SCREEN, FORM_SCREEN } from "./constants/ScreenContants";
+import { ConfirmScreen } from "./features/confirm/presentation/ConfirmScreen";
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Form: undefined;
+  Confirm: undefined,
+  Error: undefined
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
   return (
@@ -13,10 +20,9 @@ function App(): React.JSX.Element {
       <StatusBar backgroundColor="#003670"/>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={FORM_SCREEN}>
-          <Stack.Screen name={FORM_SCREEN} component={FormScreen} options={{
-            headerShown: false
-          }}/>
+          initialRouteName="Form" screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Form" component={FormScreen}/>
+          <Stack.Screen name="Confirm" component={ConfirmScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Providers>

@@ -1,9 +1,9 @@
 import { StyleSheet, Text } from "react-native";
 import { TextType } from "./types/TextType";
 
-const Headline2 = (props: TextType) => {
+const Headline2 = ({text, textAlign}: TextType) => {
     return (
-        <Text style={styles.text}>{props.text}</Text>
+        <Text style={[styles.text, {textAlign: textAlign}]}>{text}</Text>
     )
 }
 
