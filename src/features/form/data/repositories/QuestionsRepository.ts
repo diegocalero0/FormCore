@@ -2,7 +2,7 @@ import { QuestionModel } from "../../domain/models/QuestionModel";
 import { TeamCoreApi } from "../../../../api/TeamCoreApi"
 import { questionModelFromDto } from "../adapters/QuestionAdapter";
 import { AnsweredQuestionDto, SendAnswersDto } from "../dtos/requests/SendAnswersDto";
-import { DateUtils } from "../../../../util/date/DateUtils";
+import { DateUtils } from "../../../../utils/DateUtils";
 
 export const QuestionsRepository = {
     getQuestions(): Promise<QuestionModel[]> {
