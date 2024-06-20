@@ -5,8 +5,20 @@ import Headline2 from "../../../components/text/Headline2"
 import BodyMedium from "../../../components/text/BodyMedium"
 import MainButton from "../../../components/buttons/MainButton"
 import OutlinedButton from "../../../components/buttons/OutlinedButton"
+import { RootStackParamList } from "../../../App"
+import { StackScreenProps } from "@react-navigation/stack"
 
-export const ConfirmScreen = () => {
+type Props = StackScreenProps<RootStackParamList, "Confirm">
+
+export const ConfirmScreen = ({navigation}: Props) => {
+    const navigateToForm = () => {
+        navigation.replace("Form")
+    }
+
+    const navigateToFinish = () => {
+        navigation.replace("Finish")
+    }
+
     return (<View style={styles.mainContainer}>
         <LottieView
             source={require('../../../assets/json/success_animation.json')}
@@ -23,10 +35,10 @@ export const ConfirmScreen = () => {
                 textAlign="center" />
         </View>
         <View style={styles.button}>
-            <MainButton text="Volver a responder" onPress={() => {}} />
+            <MainButton text="Volver a responder" onPress={navigateToForm} />
         </View>
         <View style={styles.button}>
-            <OutlinedButton text="Finalizar" onPress={() => {}} />
+            <OutlinedButton text="Finalizar" onPress={navigateToFinish} />
         </View>
     </View>)
 }

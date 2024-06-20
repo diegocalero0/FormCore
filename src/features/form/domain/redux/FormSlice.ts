@@ -74,10 +74,10 @@ export const formSlice = createSlice({
             }
         },
         resetState: (state) => {
-            state.questions = state.questions.map<QuestionModel>(question => {
-                question.selectedAnswer = null
-                return question
-            })
+            state.error = null
+            state.errorSendingAnswers = null
+            state.loading = false
+            state.sendingAnswers = false
             state.answersSent = false
         }
     },
