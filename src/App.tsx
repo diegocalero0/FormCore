@@ -1,11 +1,33 @@
-import { View, Text, StatusBar } from "react-native"
+import { StatusBar, useColorScheme } from "react-native"
 import { Providers } from "./redux/providers"
 import { FormScreen } from "./features/form/presentation/FormScreen"
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from "@react-navigation/native";
-import { CONFIRM_SCREEN, FORM_SCREEN } from "./constants/ScreenContants";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { ConfirmScreen } from "./features/confirm/presentation/ConfirmScreen";
 import { FinishScreen } from "./features/finish/presentation/FinishScreen";
+
+const LightTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#003670',
+    background: 'white',
+    card: 'white',
+    border: '#003670',
+  },
+};
+
+const DarkTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#003670',
+    background: 'rgb(60, 60, 60)',
+    text: "white",
+    card: 'rgb(40, 40, 40)',
+    border: 'white'
+  },
+};
 
 export type RootStackParamList = {
   Form: undefined;
@@ -16,10 +38,13 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
+
+  const scheme = useColorScheme();
+
   return (
     <Providers>
-      <StatusBar backgroundColor="#003670"/>
-      <NavigationContainer>
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
+        <StatusBar backgroundColor="#003670"/>
         <Stack.Navigator
           initialRouteName="Form" screenOptions={{headerShown: false}}>
           <Stack.Screen name="Form" component={FormScreen}/>

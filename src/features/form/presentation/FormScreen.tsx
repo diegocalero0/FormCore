@@ -5,7 +5,6 @@ import { areAllQuestionsAnswered, getQuestions, resetState, sendAnswers } from "
 import { useEffect } from "react";
 import QuestionCard from "./components/QuestionCard";
 import Headline1 from "../../../components/text/Headline1";
-import { SvgUri } from "react-native-svg";
 import BodyMedium from "../../../components/text/BodyMedium";
 import MainButton from "../../../components/buttons/MainButton";
 import Headline2 from "../../../components/text/Headline2";
@@ -13,10 +12,15 @@ import LottieView from "lottie-react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../App";
 import { Snackbar } from "react-native-paper";
+import { useTheme } from "@react-navigation/native";
+import TeamCoreLogo from "../../../components/logo/TeamCoreLogo";
 
 type Props = StackScreenProps<RootStackParamList, "Form">
 
 export function FormScreen({ navigation }: Props) {
+
+    const { colors } = useTheme();
+    const styles = makeStyles(colors)
 
     const dispatch = useAppDispatch()
     const answersSent = useAppSelector(state => state.formReducer.answersSent)
@@ -38,10 +42,9 @@ export function FormScreen({ navigation }: Props) {
     }, [answersSent])
 
 
-
     const ScreenLoader = () => {
         return (<View style={styles.loaderContainer}>
-            <ActivityIndicator size={32} color={"#003670"}/>
+            <ActivityIndicator size={32} color={colors.primary} />
         </View>)
     }
 
@@ -86,11 +89,7 @@ export function FormScreen({ navigation }: Props) {
                     contentContainerStyle={styles.scrollViewContentContainer}
                     style={styles.scrollView}>
                     <View style={styles.greetings}>
-                        <SvgUri
-                            height={100}
-                            width={200}
-                            uri="https://www.teamcore.net/wp-content/uploads/2020/10/logoteamcore-azul-37.svg"
-                        />
+                        <TeamCoreLogo/>
                         <Headline1 text="¡Bienvenido a Formcore LATAM! 👋" />
                         <BodyMedium text="Contesta el siguiente formulario para probar tus conocimientos sobre cultura general, ¡Buena suerte! " />
                     </View>
@@ -122,22 +121,22 @@ export function FormScreen({ navigation }: Props) {
     )
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: any) => StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
     },
     loaderContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
     },
     errorContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
         paddingHorizontal: 24
     },
     greetings: {
@@ -157,7 +156,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         width: '100%',
         padding: 16,
-        backgroundColor: 'white',
+        backgroundColor: colors.card,
         shadowColor: 'black',
         shadowOffset: {
             width: 0,

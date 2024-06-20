@@ -1,5 +1,6 @@
 import { StyleSheet, TouchableOpacity } from "react-native"
 import BodyMedium from "../text/BodyMedium"
+import { useTheme } from "@react-navigation/native";
 
 interface MainButtonProps {
     text: string,
@@ -9,7 +10,8 @@ interface MainButtonProps {
 
 const OutlinedButton = ({ text, disabled, onPress } : MainButtonProps) => {
 
-    const color = disabled ? "#BEBEBE" : "#003670"
+    const { colors } = useTheme();
+    const color = disabled ? "#BEBEBE" : colors.border
 
     return (
         <TouchableOpacity onPress={onPress} disabled={disabled} style={[styles.button, {borderColor: color}]}>

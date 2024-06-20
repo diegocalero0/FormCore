@@ -7,10 +7,15 @@ import MainButton from "../../../components/buttons/MainButton"
 import OutlinedButton from "../../../components/buttons/OutlinedButton"
 import { RootStackParamList } from "../../../App"
 import { StackScreenProps } from "@react-navigation/stack"
+import { useTheme } from "@react-navigation/native"
 
 type Props = StackScreenProps<RootStackParamList, "Confirm">
 
 export const ConfirmScreen = ({navigation}: Props) => {
+
+    const { colors } = useTheme();
+    const styles = makeStyles(colors)
+
     const navigateToForm = () => {
         navigation.replace("Form")
     }
@@ -43,10 +48,10 @@ export const ConfirmScreen = ({navigation}: Props) => {
     </View>)
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: any) => StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 24

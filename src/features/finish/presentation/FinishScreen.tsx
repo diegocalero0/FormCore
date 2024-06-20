@@ -5,27 +5,27 @@ import LottieView from "lottie-react-native"
 import BodyMedium from "../../../components/text/BodyMedium"
 import Headline2 from "../../../components/text/Headline2"
 import MainButton from "../../../components/buttons/MainButton"
-import OutlinedButton from "../../../components/buttons/OutlinedButton"
-import { SvgUri } from "react-native-svg"
+import { useTheme } from "@react-navigation/native"
+import TeamCoreLogo from "../../../components/logo/TeamCoreLogo"
 
 type Props = StackScreenProps<RootStackParamList, "Finish">
 
 export const FinishScreen = ({ navigation }: Props) => {
+
+    const { colors } = useTheme();
+    const styles = makeStyles(colors)
+
     const navigateToForm = () => {
         navigation.replace("Form")
     }
 
     return (<View style={styles.mainContainer}>
         <View style={styles.logo}>
-            <SvgUri
-                height={80}
-                width={160}
-                uri="https://www.teamcore.net/wp-content/uploads/2020/10/logoteamcore-azul-37.svg"
-            />
+            <TeamCoreLogo/>
         </View>
         <View style={styles.content}>
             <LottieView
-                source={require('../../../assets/json/thanks_animation.json')}
+                source={require('../../../assets/json/success_animation.json')}
                 autoPlay
                 loop
                 style={styles.animation} />
@@ -41,10 +41,10 @@ export const FinishScreen = ({ navigation }: Props) => {
 
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: any) => StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 24
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     animation: {
-        width: 150,
-        height: 150,
+        width: 200,
+        height: 200,
         resizeMode: 'cover'
     },
     button: {

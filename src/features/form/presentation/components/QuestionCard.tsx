@@ -5,12 +5,16 @@ import { RadioButton } from "react-native-paper";
 import BodyMedium from "../../../../components/text/BodyMedium";
 import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import { isAnswerSelected, selectAnswer } from "../../domain/redux/FormSlice";
+import { useTheme } from "@react-navigation/native";
 
 interface QuestionCardProps {
     question: QuestionModel;
 }
 
 const QuestionCard = ({ question }: QuestionCardProps) => {
+
+    const { colors } = useTheme()
+    const styles = makeStyles(colors)
 
     const dispatch = useAppDispatch()
 
@@ -45,10 +49,10 @@ const QuestionCard = ({ question }: QuestionCardProps) => {
     )
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: any) => StyleSheet.create({
     card: {
         alignSelf: 'stretch',
-        backgroundColor: 'white',
+        backgroundColor: colors.card,
         borderRadius: 6,
         padding: 16,
         shadowColor: 'black',
