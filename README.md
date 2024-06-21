@@ -1,6 +1,30 @@
 # Formcore App - Una App de prueba para Teamcore
 Este proyecto corresponde a una aplicación mobile que permite obtener un formulario y responder el mismo conectándose a una API de pruebas de Teamcore.
 
+## Funcionalidad de la aplicación
+
+La aplicación tiene como funcionalidad principal presentar al usuario un formulario, permitirle responder las preguntas,
+enviarlas y mostrar una pantalla que le permite elegir si desea responderlo nuevamente o si desea finalizar.
+En caso de que el usuario desee finalizar se le manda a una pantalla de Finalización.
+
+Adicionalmente se agregó una pantalla de error en caso de que haya una caida de internet o fallo en el servicio de obtención de las preguntas
+y un Snackbar en caso de fallo en el servicio de envio de respuestas.
+
+Las pantallas se puede ver a continuación:
+
+| Launcher     | Formulario | Formulario con respuestas |
+| ---      | ---       | --- |
+| ![image](https://github.com/diegocalero0/FormCore/assets/20039102/668f0da2-73fe-4bab-80e7-c8b74466bc83) |![image](https://github.com/diegocalero0/FormCore/assets/20039102/d61877db-855e-4a04-81ff-397098cf5b8c)|![image](https://github.com/diegocalero0/FormCore/assets/20039102/691b0b7c-ac56-4dba-a676-956ca533ec5b) |
+
+| Error cargando preguntas     | Preguntas enviadas | Finalización |
+| ---      | ---       | --- |
+|![image](https://github.com/diegocalero0/FormCore/assets/20039102/fbf736d1-5791-42d0-9c97-f546f3077068)|![image](https://github.com/diegocalero0/FormCore/assets/20039102/f287380f-6677-49e4-a241-02f9699f253e)|![image](https://github.com/diegocalero0/FormCore/assets/20039102/f984f69c-256a-4cb2-9902-7f49d9985aa9)|
+
+
+
+
+
+
 ## Arquitectura de la aplicación
 Formcore fue desarrollada utilizando React Native en su versión 0.74.2 y utilizando como lenguage de programación principal TypeScript.
 
