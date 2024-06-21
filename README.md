@@ -21,8 +21,10 @@ Las pantallas se puede ver a continuación:
 |![image](https://github.com/diegocalero0/FormCore/assets/20039102/fbf736d1-5791-42d0-9c97-f546f3077068)|![image](https://github.com/diegocalero0/FormCore/assets/20039102/f287380f-6677-49e4-a241-02f9699f253e)|![image](https://github.com/diegocalero0/FormCore/assets/20039102/f984f69c-256a-4cb2-9902-7f49d9985aa9)|
 
 
-
-
+También Tiene Modo Noche 🌙
+| Formulario     | Preguntas enviadas | Finalización |
+| ---      | ---       | --- |
+|![image](https://github.com/diegocalero0/FormCore/assets/20039102/25c2f2c8-9722-4a65-b786-681b3a4ae142)|![image](https://github.com/diegocalero0/FormCore/assets/20039102/8ec371a2-0a5a-4c91-871b-9feef75c0483)|![image](https://github.com/diegocalero0/FormCore/assets/20039102/d21a02c5-17f7-4194-8610-6bcad23cf7b6)|
 
 
 ## Arquitectura de la aplicación
