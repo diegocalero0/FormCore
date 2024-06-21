@@ -1,4 +1,4 @@
-import { TEAMCORE_API_TOKEN, TEAMCORE_API_URL } from "@env"
+import { TEAMCORE_API_TOKEN, TEAMCORE_API_URL } from "react-native-dotenv"
 import axios, { AxiosResponse } from "axios"
 import { GetQuestionsResponseDto } from "../features/form/data/dtos/responses/GetQuestionsResponseDto"
 import { SendAnswersDto } from "../features/form/data/dtos/requests/SendAnswersDto"
@@ -12,6 +12,7 @@ const teamCoreAxiosInstance = axios.create({
 
 export const TeamCoreApi = {
     fetchQuestions(): Promise<GetQuestionsResponseDto> {
+        console.log(TEAMCORE_API_URL)
         return new Promise<GetQuestionsResponseDto>(async (resolve, reject) => {
             try {
                 const response: AxiosResponse<GetQuestionsResponseDto> = await teamCoreAxiosInstance.get("/questions")
