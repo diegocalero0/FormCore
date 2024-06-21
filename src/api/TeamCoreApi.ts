@@ -12,7 +12,6 @@ const teamCoreAxiosInstance = axios.create({
 
 export const TeamCoreApi = {
     fetchQuestions(): Promise<GetQuestionsResponseDto> {
-        console.log(TEAMCORE_API_URL)
         return new Promise<GetQuestionsResponseDto>(async (resolve, reject) => {
             try {
                 const response: AxiosResponse<GetQuestionsResponseDto> = await teamCoreAxiosInstance.get("/questions")
