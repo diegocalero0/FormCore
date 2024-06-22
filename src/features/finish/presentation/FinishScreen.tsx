@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack"
 import { RootStackParamList } from "../../../App"
-import { StyleSheet, View } from "react-native"
+import { SafeAreaView, StyleSheet, View } from "react-native"
 import LottieView from "lottie-react-native"
 import BodyMedium from "../../../components/text/BodyMedium"
 import Headline2 from "../../../components/text/Headline2"
@@ -20,9 +20,9 @@ export const FinishScreen = ({ navigation }: Props) => {
     }
 
     return (<View style={styles.mainContainer}>
-        <View style={styles.logo}>
+        <SafeAreaView style={styles.logo}>
             <TeamCoreLogo/>
-        </View>
+        </SafeAreaView>
         <View style={styles.content}>
             <LottieView
                 source={require('../../../assets/json/success_animation.json')}

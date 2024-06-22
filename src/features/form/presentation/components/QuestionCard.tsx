@@ -21,7 +21,8 @@ const QuestionCard = ({ question }: QuestionCardProps) => {
     const AnswerRadioButton = (answer: AnswerModel) => {
         const isSelected = useAppSelector(state => isAnswerSelected({ form: state.formReducer }, question, answer))
         return <View key={answer.answerId} style={styles.answerRadioButton}>
-            <RadioButton
+            <RadioButton.Android
+                theme={{colors: {accent: "red"}}}
                 value={answer.answerId}
                 color="#003670"
                 status={isSelected ? "checked" : "unchecked"}
@@ -58,7 +59,7 @@ const makeStyles = (colors: any) => StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: {
             width: 0,
-            height: 4,
+            height: -2,
         },
         shadowOpacity: 0.3,
         shadowRadius: 6,

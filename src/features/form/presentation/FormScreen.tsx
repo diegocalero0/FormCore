@@ -1,4 +1,4 @@
-import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { areAllQuestionsAnswered, getQuestions, resetState, sendAnswers } from "../domain/redux/FormSlice";
@@ -84,10 +84,10 @@ export function FormScreen({ navigation }: Props) {
             {loading && <ScreenLoader />}
             {error != null && !loading && <ScreenError />}
             {error == null && !loading &&
-
-                <ScrollView
+                <SafeAreaView style={styles.scrollSafeAreaView}>
+                    <ScrollView
                     contentContainerStyle={styles.scrollViewContentContainer}
-                    style={styles.scrollView}>
+                    style={styles.scrollSafeAreaView}>
                     <View style={styles.greetings}>
                         <TeamCoreLogo/>
                         <Headline1 text="¡Bienvenido a Formcore LATAM! 👋" />
@@ -103,11 +103,15 @@ export function FormScreen({ navigation }: Props) {
                             })
                         }
                     </View>
-                </ScrollView>}
+                </ScrollView>
+                </SafeAreaView>
+            }
             <View style={styles.buttonContainer}>
+                <SafeAreaView>
                 <MainButton onPress={() => {
                     dispatch(sendAnswers(questions))
                 }} text="Finalizar" disabled={!isMainButtonEnabled} />
+                </SafeAreaView>
             </View>
             <Snackbar
                 visible={errorSendingAnswers != null}
@@ -143,7 +147,7 @@ const makeStyles = (colors: any) => StyleSheet.create({
         marginHorizontal: 16,
         marginBottom: 16
     },
-    scrollView: {
+    scrollSafeAreaView: {
         width: '100%',
         flex: 1
     },
@@ -160,7 +164,7 @@ const makeStyles = (colors: any) => StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: {
             width: 0,
-            height: -4
+            height: -2
         },
         shadowOpacity: 0.3,
         shadowRadius: 6,
