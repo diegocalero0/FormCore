@@ -1,6 +1,9 @@
 # Formcore App - Una App de prueba para Teamcore
 Este proyecto corresponde a una aplicación mobile que permite obtener un formulario y responder el mismo conectándose a una API de pruebas de Teamcore.
 
+El proyecto se configuró y desarrolló para que funcionen correctamente
+en Android y IOS
+
 ## Funcionalidad de la aplicación
 
 La aplicación tiene como funcionalidad principal presentar al usuario un formulario, permitirle responder las preguntas,
@@ -75,3 +78,10 @@ Para instalar todas las dependencias que requiere el proyecto. Y ejecutar:
 npx react-native run-android
 ```
 Para correr el proyecto en un emulador o dispositivo Android.
+
+## Ejecutar tests
+
+Se implementaron pruebas unitarias las cuales se pueden ejecutar corriendo
+```
+npm test
+```
